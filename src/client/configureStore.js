@@ -8,6 +8,7 @@ const sagaMiddleware = createSagaMiddleware();
 const enhancer = compose(
   // Middleware you want to use in development:
   applyMiddleware(sagaMiddleware),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
 

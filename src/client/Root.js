@@ -32,7 +32,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   const action = (type) => { dispatch({ type }); };
-  const onIncrement = () => { dispatch({ type:'INCREMENT' }); };
+  const onIncrement = () => { action('INCREMENT'); };
   const onDecrement = () => { action('DECREMENT'); };
   const onIncrementAsync = () => { action('INCREMENT_ASYNC'); };
   return bindActionCreators({ onIncrement, onDecrement, onIncrementAsync }, dispatch);
