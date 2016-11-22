@@ -1,10 +1,28 @@
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
+import { render } from 'react-dom';
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import { createStore, applyMiddleware, bindActionCreators } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-import Root from './Root';
+import reducer from './reducers';
+import rootSaga from './sagas';
+import routes from './routes';
 
-export default (
-  <Route path='/'>
-    <IndexRoute component={Root} />
-  </Route>
+injectTapEventPlugin();
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(
+  reducer,
+  applyMiddleware(sagaMiddleware)
 );
+sagaMiddleware.run(rootSaga);
+
+render((
+  <Provider store={store} >
+    <Router history={browserHistory} routes={routes} />
+  </Provider>
+), document.getElementById('root'));
+
+store.subscribe(render);

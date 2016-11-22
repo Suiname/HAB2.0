@@ -1,33 +1,45 @@
 import "babel-polyfill"
 
-import React from 'react'
+import React, {PropTypes} from 'react'
 import ReactDOM from 'react-dom'
-import { createStore, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 
 import Counter from './Counter';
 import reducer from './reducers';
 import rootSaga from './sagas';
 
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(
-  reducer,
-  applyMiddleware(sagaMiddleware)
-);
-sagaMiddleware.run(rootSaga);
-
-const action = type => store.dispatch({ type });
-
-export default function render() {
-  ReactDOM.render(
-    <Counter
-      value={store.getState()}
-      onIncrement={() => action('INCREMENT')}
-      onDecrement={() => action('DECREMENT')}
-      onIncrementAsync={() => action('INCREMENT_ASYNC')} />,
-    document.getElementById('root')
-  )
+class Root extends React.Component{
+  render(){
+    return(
+      <Counter
+        value={this.props.value}
+        onIncrement={this.props.onIncrement}
+        onDecrement={this.props.onDecrement}
+        onIncrementAsync={this.props.onIncrementAsync} />
+    );
+  }
 }
 
-render()
-store.subscribe(render)
+Root.propTypes = {
+  value: PropTypes.number.isRequired,
+  onIncrement: PropTypes.func.isRequired,
+  onDecrement: PropTypes.func.isRequired,
+  onIncrementAsync: PropTypes.func.isRequired,
+}
+
+function mapStateToProps(state) {
+  return {
+    value: state,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  const action = type => dispatch({ type });
+  const onIncrement = () => action('INCREMENT');
+  const onDecrement = () => action('DECREMENT');
+  const onIncrementAsync = () => action('INCREMENT_ASYNC');
+  return bindActionCreators({ onIncrement, onDecrement, onIncrementAsync }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Root)
