@@ -18,7 +18,7 @@ sagaMiddleware.run(rootSaga);
 
 const action = type => store.dispatch({ type });
 
-function render() {
+export default function render() {
   ReactDOM.render(
     <Counter
       value={store.getState()}
