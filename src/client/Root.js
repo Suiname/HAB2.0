@@ -31,10 +31,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  const action = (type) => { dispatch({ type }); };
-  const onIncrement = () => { action('INCREMENT'); };
-  const onDecrement = () => { action('DECREMENT'); };
-  const onIncrementAsync = () => { action('INCREMENT_ASYNC'); };
+  const onIncrement = () => { return { type: 'INCREMENT' }; };
+  const onDecrement = () => { return { type: 'DECREMENT' }; };
+  const onIncrementAsync = () => { return { type: 'INCREMENT_ASYNC' }; };
   return bindActionCreators({ onIncrement, onDecrement, onIncrementAsync }, dispatch);
 }
 
