@@ -1,10 +1,19 @@
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
+import { render } from 'react-dom';
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import { createStore, applyMiddleware, bindActionCreators } from 'redux';
 
-import Root from './Root';
+import routes from './routes';
+import configureStore from './configureStore';
 
-export default (
-  <Route path='/'>
-    <IndexRoute component={Root} />
-  </Route>
-);
+injectTapEventPlugin();
+
+const store = configureStore(0);
+
+render((
+  <Provider store={store} >
+    <Router history={browserHistory} routes={routes} />
+  </Provider>
+), document.getElementById('root'));

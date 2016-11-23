@@ -5,7 +5,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   bail: true,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
   entry: ['./src/client/init', 'webpack-hot-middleware/client'],
   output: {
     filename: 'bundle.js',
@@ -45,7 +45,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel'] },
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader', query:{ presets: ["es2015", "react", "stage-2"]} },
       { test: /\.css$/, loader: 'style!css!postcss' },
       { test: /\.woff(\d+|\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,  loader: "url?limit=10000&mimetype=application/octet-stream" },
