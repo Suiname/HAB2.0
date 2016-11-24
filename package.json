@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.production.js",
     "start": "cross-env NODE_ENV=development node run.js",
     "production": "cross-env NODE_ENV=production node run.js",
-    "test": "babel-node src/client/sagas.spec.js | tap-spec"
+    "test": "babel-node test/sagas.spec.js | tap-spec"
   },
   "author": "",
   "license": "ISC",

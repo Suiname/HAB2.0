@@ -1,6 +1,0 @@
-{
-  "Database": {
-    "URI": "mongodb://localhost/TempusDemo"
-  },
-  "port": "8080"
-}
