@@ -34,6 +34,9 @@ mongoose.connect(dbURI, (err) => {
   }
 })
 
+// import mongoose models
+import account from './models/account';
+
 // Middleware Requirements
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
