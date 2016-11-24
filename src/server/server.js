@@ -47,9 +47,11 @@ app.use(favicon(path.join(__dirname, '../client/_static', 'favicon.ico')));
 
 // Route Requirements
 import api from './routes/api'
+import auth from './routes/auth'
 
 // Mount express routes
-app.use('/api', api)
+app.use('/api', api);
+app.use('/auth', auth);
 
 
 // If no route is matched before this any route will be served to the react router to handle.
