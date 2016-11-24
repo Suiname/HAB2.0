@@ -21,6 +21,8 @@ const userSchema = new Schema({
     },
 });
 
+//TODO convert this code to ES6, currently it does not work as this is undefined in arrow functions
+
 userSchema.pre('save', function(next) {
     var user = this;
 
