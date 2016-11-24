@@ -1,6 +1,6 @@
 {
   "Database": {
-    "URI": "mongodb://localhost/TempusDemo"
+    "URI": "mongodb://localhost/HAB2"
   },
   "port": "3000"
 }
