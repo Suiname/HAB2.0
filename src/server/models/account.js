@@ -18,7 +18,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true
-    },
+    }
 });
 
 //TODO convert this code to ES6, currently it does not work as this is undefined in arrow functions
