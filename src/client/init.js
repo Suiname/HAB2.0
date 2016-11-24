@@ -6,7 +6,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { createStore, applyMiddleware, bindActionCreators } from 'redux';
 
 import routes from './routes';
-import configureStore from './configureStore';
+import configureStore from './store/configureStore';
 
 injectTapEventPlugin();
 
