@@ -20,7 +20,7 @@
       ],
     },
     "production": {
-      "plugins": []
+      "plugins": ["transform-runtime"]
     }
   }
 }
