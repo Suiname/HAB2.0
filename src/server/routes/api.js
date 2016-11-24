@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { authcheck } from '../middleware';
 
 const router = Router()
 
@@ -8,6 +9,8 @@ let todos = [
   'Walk the dog',
   'Take out garbage'
 ];
+
+router.use(authcheck);
 
 router.get('/randomtodo', function(req, res) {
   let todo = todos[Math.floor(Math.random() * todos.length)];

@@ -4,6 +4,9 @@
 
 import { Router } from 'express'
 import account from '../models/account';
+import jwt from 'jsonwebtoken';
+import config from 'config';
+const secret = config.get('secret');
 
 const router = Router()
 
@@ -39,7 +42,15 @@ router.post('/login', (req, res) => {
             if (!result){
                 res.sendStatus(401).send();
             }
-            res.sendStatus(200).send();
+            const token = jwt.sign(user, secret, {
+                expiresIn: 1440 // expires in 24 hours
+            });
+            req.body.token = token;
+            res.json({
+                success: true,
+                message: "Logged in",
+                token
+            });
         })
     })
 });
