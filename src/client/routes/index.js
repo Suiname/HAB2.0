@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import Root from './../components/Root';
+import Login from './../components/Login';
 
 export default (
   <Route path='/'>
-    <IndexRoute component={Root} />
+    <IndexRoute component={Login} />
   </Route>
 );
