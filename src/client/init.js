@@ -7,10 +7,13 @@ import { createStore, applyMiddleware, bindActionCreators } from 'redux';
 
 import routes from './routes';
 import configureStore from './store/configureStore';
+import './_static/css/main.css';
 
 injectTapEventPlugin();
 
 const store = configureStore(0);
+
+
 
 render((
   <Provider store={store} >
