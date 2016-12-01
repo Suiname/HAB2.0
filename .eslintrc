@@ -1,0 +1,27 @@
+{
+    parser: 'babel-eslint',
+    extends: [
+        'airbnb'
+    ],
+    plugins: [
+        'babel'
+    ],
+    env: {
+        browser: true
+    },
+    globals: {
+        $: false,
+        require: false,
+        envConfig: false,
+    },
+    rules: {
+        'global-require': 0,
+        'max-len': [2, 250, 2],
+        'generator-star-spacing': 0,
+        'babel/generator-star-spacing': 1,
+        'no-use-before-define': 'error',
+        'react/require-extension': [0],
+        'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx'] }],
+        'no-param-reassign': ['error', { props: false }]
+    }
+}
