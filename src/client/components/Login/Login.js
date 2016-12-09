@@ -1,11 +1,23 @@
 import React, {PropTypes} from 'react'
 import logo from '../../_static/images/logo.png';
 
-class LoginComponent extends React.Component{
-  render(){
+import bg from '../../_static/images/bkgd_baseballRightTop.jpg';
+import grass from '../../_static/images/login_header_grass.jpg';
+
+const style = {
+  'background-image': `url(${bg})`,
+  'background-size': 'cover',
+};
+
+const headerStyle = {
+  'background-image': `url(${grass})`,
+};
+
+class LoginComponent extends React.Component {
+  render() {
     return (
-    <div>
-      <div id="page_header">
+    <div id="login_wrapper" style={style}>
+      <div id="page_header" style={headerStyle}>
         <div id="container_logo">
           <img src={logo} alt="" />
         </div>
@@ -17,7 +29,7 @@ class LoginComponent extends React.Component{
             <form action="/" method="post">
               <label htmlFor="login_name">Login</label>
                 <input className="u-full-width" type="text" name="login_name" placeholder="Account Name" />
-                 <label htmlFor="login_password">Password</label>
+                <label htmlFor="login_password">Password</label>
                 <input className="u-full-width" type="password" name="login_password" placeholder="Password" />
                 <input className="button-primary u-full-width" type="submit" className="login_button" value="ENTER APP" />
             </form>
