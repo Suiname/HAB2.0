@@ -1,23 +1,29 @@
-import React, {PropTypes} from 'react'
-import { connect } from 'react-redux'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LoginComponent from './Login';
 
-class Login extends React.Component{
-  render(){
+class Login extends React.Component {
+  loginFunction() {
+    // TODO create action to replace this.
+    console.log('placeholder');
+  }
+  render() {
     return (
-      <LoginComponent />
+      <LoginComponent loginFunction={this.props.loginFunction} />
     );
   }
 }
 
 Login.propTypes = {
-  //TODO propTypes
+  // TODO propTypes
+  loginFunction: PropTypes.func,
 };
 
 function mapStateToProps(state) {
-  //TODO return correct state
+  // TODO return correct state
   return {
+    state,
   };
 }
 
