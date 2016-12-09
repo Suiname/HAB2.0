@@ -13,8 +13,6 @@ injectTapEventPlugin();
 
 const store = configureStore(0);
 
-
-
 render((
   <Provider store={store} >
     <Router history={browserHistory} routes={routes} />
