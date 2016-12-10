@@ -10,7 +10,7 @@ class Login extends React.Component {
   }
   render() {
     return (
-      <LoginComponent loginFunction={this.props.loginFunction} />
+      <LoginComponent loginFunction={this.loginFunction} />
     );
   }
 }

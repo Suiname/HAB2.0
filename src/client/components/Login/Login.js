@@ -30,20 +30,20 @@ class LoginComponent extends React.Component {
         <div className="container">
           <div className="row">
             <div className="four columns" id="login_left_col">
-              <form action="/" method="post">
+              <div>
                 <label htmlFor="login_name">Login</label>
                 <input className="u-full-width" type="text" name="login_name" placeholder="Account Name" />
                 <label htmlFor="login_password">Password</label>
                 <input className="u-full-width" type="password" name="login_password" placeholder="Password" />
                 <input className="button-primary u-full-width" type="submit" className="login_button" value="ENTER APP" />
-              </form>
+              </div>
 
-              <form action="/" method="post">
+              <div>
                 <label htmlFor="create_account_name">Create Account</label>
                 <input className="u-full-width" type="text" name="create_account_name" placeholder="Account Name" />
                 <input className="u-full-width" type="password" name="create_account_password" placeholder="Password" />
-                <input className="button-primary u-full-width" type="submit" className="login_button" value="CREATE ACCOUNT" onClick={this.loginFunction} />
-              </form>
+                <button className="button-primary u-full-width" className="login_button" value="CREATE ACCOUNT" onClick={this.loginFunction} />
+              </div>
             </div>
 
             <div className="eight columns" id="login_right_col">
