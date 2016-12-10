@@ -1,6 +1,6 @@
 import { takeEvery, delay } from 'redux-saga';
 import { put, call, fork, race, take } from 'redux-saga/effects';
-
+import { register, login } from '../actions/api';
 export function* helloSaga() {
   console.log('Hello Sagas!')
 }
@@ -36,9 +36,9 @@ export function * authorize ({username, password, isRegistering}) {
     // as if it's synchronous because we pause execution until the call is done
     // with `yield`!
     if (isRegistering) {
-      response = yield call(auth.register, username, password);
+      response = yield call(register, username, password);
     } else {
-      response = yield call(auth.login, username, password);
+      response = yield call(login, username, password);
     }
 
     return response
