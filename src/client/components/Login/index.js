@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LoginComponent from './Login';
+import { sendingRequest, loginRequest, logout, setAuthState } from '../../actions';
 
 class Login extends React.Component {
   loginFunction() {
@@ -29,7 +30,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   // TODO implement dispatch
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ sendingRequest, loginRequest, logout, setAuthState }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
