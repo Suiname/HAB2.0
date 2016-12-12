@@ -1,6 +1,7 @@
 import { takeEvery, delay } from 'redux-saga';
 import { put, call, fork, race, take } from 'redux-saga/effects';
-import { register, login } from '../actions/api';
+import { register, login, userLogout } from '../actions/api';
+
 export function * helloSaga() {
   console.log('Hello Sagas!')
 }
@@ -47,6 +48,25 @@ export function *authorize({ username, password, isRegistering }) {
   }
 }
 
+export function *logout() {
+  // We tell Redux we're in the middle of a request
+  yield put({ type: 'SENDING_REQUEST', sending: true });
+
+  // Similar to above, we try to log out by calling the `logout` function in the
+  // `auth` module. If we get an error, we send an appropiate action. If we don't,
+  // we return the response.
+  try {
+    const response = yield call(userLogout);
+    yield put({ type: 'SENDING_REQUEST', sending: false });
+
+    return response;
+  } catch (error) {
+    yield put({ type: 'REQUEST_ERROR', error: error.message });
+
+    return false;
+  }
+}
+
 export function *loginFlow() {
   // Because sagas are generators, doing `while (true)` doesn't block our program
   // Basically here we say "this saga is always listening for actions"
@@ -78,10 +98,21 @@ export function *loginFlow() {
   }
 }
 
+export function *logoutFlow() {
+  while (true) {
+    yield take('LOGOUT');
+    yield put({ type: 'SET_AUTH', newAuthState: false });
+
+    yield call(logout);
+  }
+}
+
+
 export default function *rootSaga() {
   yield [
     helloSaga(),
     watchIncrementAsync(),
     fork(loginFlow),
+    fork(logoutFlow),
   ];
 }

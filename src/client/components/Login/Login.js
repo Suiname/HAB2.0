@@ -17,6 +17,7 @@ class LoginComponent extends React.Component {
   constructor(props) {
     super(props);
     this.loginFunction = this.props.loginFunction;
+    this.logoutFunction = this.props.logoutFunction;
   }
   render() {
     return (
@@ -42,7 +43,8 @@ class LoginComponent extends React.Component {
                 <label htmlFor="create_account_name">Create Account</label>
                 <input className="u-full-width" type="text" name="create_account_name" placeholder="Account Name" />
                 <input className="u-full-width" type="password" name="create_account_password" placeholder="Password" />
-                <button className="button-primary u-full-width" className="login_button" value="CREATE ACCOUNT" onClick={this.loginFunction} />
+                <button className="button-primary u-full-width" className="login_button" onClick={this.loginFunction} >Login</button>
+                <button className="button-primary u-full-width" className="login_button" onClick={this.logoutFunction} >Logout</button>
               </div>
             </div>
 
@@ -64,8 +66,8 @@ class LoginComponent extends React.Component {
 }
 
 LoginComponent.propTypes = {
-  // TODO propTypes
   loginFunction: PropTypes.func,
+  logoutFunction: PropTypes.func,
 };
 
 export default LoginComponent;
