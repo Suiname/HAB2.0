@@ -5,13 +5,9 @@ import LoginComponent from './Login';
 import { sendingRequest, loginRequest, logout, setAuthState } from '../../actions';
 
 class Login extends React.Component {
-  loginFunction() {
-    // TODO create action to replace this.
-    console.log('placeholder');
-  }
   render() {
     return (
-      <LoginComponent loginFunction={this.loginFunction} />
+      <LoginComponent loginFunction={this.props.loginRequest} />
     );
   }
 }
@@ -19,6 +15,7 @@ class Login extends React.Component {
 Login.propTypes = {
   // TODO propTypes
   loginFunction: PropTypes.func,
+  loginRequest: PropTypes.func,
 };
 
 function mapStateToProps(state) {
