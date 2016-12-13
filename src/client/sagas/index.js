@@ -1,5 +1,6 @@
 import { takeEvery, delay } from 'redux-saga';
 import { put, call, fork, race, take } from 'redux-saga/effects';
+import { browserHistory } from 'react-router';
 import { register, login, userLogout } from '../actions/api';
 
 export function * helloSaga() {
@@ -88,6 +89,7 @@ export function *loginFlow() {
       // ...we send Redux appropiate actions
       yield put({ type: 'SET_AUTH', newAuthState: true }); // User is logged in (authorized)
       console.log('Login completed'); // Go to dashboard page
+      browserHistory.push('/main');
       // If `logout` won...
     } else if (winner.logout) {
       // ...we send Redux appropiate action
@@ -104,6 +106,7 @@ export function *logoutFlow() {
     yield put({ type: 'SET_AUTH', newAuthState: false });
 
     yield call(logout);
+    browserHistory.push('/');
   }
 }
 
