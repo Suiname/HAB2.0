@@ -26,11 +26,8 @@ export const login = (username, password) => {
       Accept: 'application/json',
     }),
   })
-  .then((result) => {
-    return result.json();
-  })
+  .then(result => result.json())
   .then((data) => {
-    console.log('Something: ', data);
     localStorage.token = data.token;
     return Promise.resolve(true);
   })
@@ -44,13 +41,11 @@ export const userLogout = () => {
   fetch('/auth/logout', {
     method: 'POST',
   })
-      .then((result) => {
-        return result.json();
-      })
+      .then(result => result.json())
       .then(() => {
-        return Promise.resolve(true);
+        Promise.resolve(true);
       })
       .catch((error) => {
-        console.log("error: ", error);
+        console.log('error: ', error);
       });
 };

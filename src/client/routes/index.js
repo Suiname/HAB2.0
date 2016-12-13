@@ -5,8 +5,8 @@ import Login from './../components/Login';
 import League from './../components/League';
 
 export default (
-  <Route path='/'>
+  <Route path="/">
     <IndexRoute component={Login} />
-    <Route path='/main' component={League} />
+    <Route path="/main" component={League} />
   </Route>
 );

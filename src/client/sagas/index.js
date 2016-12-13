@@ -3,10 +3,6 @@ import { put, call, fork, race, take } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
 import { register, login, userLogout } from '../actions/api';
 
-export function * helloSaga() {
-  console.log('Hello Sagas!')
-}
-
 // Our worker Saga: will perform the async increment task
 export function *incrementAsync() {
   yield call(delay, 1000);
@@ -113,7 +109,6 @@ export function *logoutFlow() {
 
 export default function *rootSaga() {
   yield [
-    helloSaga(),
     watchIncrementAsync(),
     fork(loginFlow),
     fork(logoutFlow),

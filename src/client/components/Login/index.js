@@ -6,6 +6,9 @@ import { sendingRequest, loginRequest, logout, setAuthState } from '../../action
 
 class Login extends React.Component {
   render() {
+    if (!this.props) {
+      return null;
+    }
     return (
       <LoginComponent loginFunction={this.props.loginRequest} logoutFunction={this.props.logout} />
     );
@@ -14,13 +17,12 @@ class Login extends React.Component {
 
 Login.propTypes = {
   // TODO propTypes
-  loginFunction: PropTypes.func,
   loginRequest: PropTypes.func,
   logout: PropTypes.func,
 };
 
 function mapStateToProps(state) {
-  console.log("State: ", state);
+  console.log('State: ', state);
   return {
     state,
   };
