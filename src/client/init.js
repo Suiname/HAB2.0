@@ -3,7 +3,6 @@ import { Router, browserHistory } from 'react-router';
 import { render } from 'react-dom';
 import React from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { createStore, applyMiddleware, bindActionCreators } from 'redux';
 
 import routes from './routes';
 import configureStore from './store/configureStore';
@@ -11,7 +10,7 @@ import './_static/css/main.css';
 
 injectTapEventPlugin();
 
-const store = configureStore(0);
+const store = configureStore({ loggedIn: false });
 
 render((
   <Provider store={store} >
