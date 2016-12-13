@@ -1,30 +1,28 @@
-import { Router } from 'express'
+import { Router } from 'express';
 import { authcheck } from '../middleware';
 
-const router = Router()
+const router = Router();
 
-let todos = [
+const todos = [
   'Work out',
   'Make a pie',
   'Walk the dog',
-  'Take out garbage'
+  'Take out garbage',
 ];
 
 router.use(authcheck);
 
-router.get('/randomtodo', function(req, res) {
-  let todo = todos[Math.floor(Math.random() * todos.length)];
+router.get('/randomtodo', (req, res) => {
+  const todo = todos[Math.floor(Math.random() * todos.length)];
   res.json(todo);
 });
 
 router.get('/test', (req, res) => {
-  res.end('hi')
-})
+  res.end('hi');
+});
 
 router.get('/tester', (req, res) => {
-  res.json({test: 'test', what: 'what'});
-})
-
-
+  res.json({ test: 'test', what: 'what' });
+});
 
 export default router;
