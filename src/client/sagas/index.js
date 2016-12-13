@@ -37,7 +37,7 @@ export function *authorize({ username, password, isRegistering }) {
 
     return response;
   } catch (error) {
-    console.log('hi');
+    console.log('Error in Saga');
     // If we get an error we send Redux the appropiate action and return
     yield put({ type: 'REQUEST_ERROR', error: error.message });
 
