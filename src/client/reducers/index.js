@@ -1,4 +1,15 @@
-export default function counter(state = 0, action) {
+const loginReducer = (state = { loggedIn: false, username: null }, action) => {
+  switch (action.type) {
+    case 'SET_AUTH':
+      return { loggedIn: action.newAuthState, username: action.username };
+    default:
+      return state;
+  }
+};
+
+export default loginReducer;
+
+export const counter = (state = 0, action) => {
   switch (action.type) {
     case 'INCREMENT':
       return state + 1
@@ -9,4 +20,4 @@ export default function counter(state = 0, action) {
     default:
       return state
   }
-}
+};

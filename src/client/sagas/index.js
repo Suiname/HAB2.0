@@ -83,13 +83,13 @@ export function *loginFlow() {
     // If `authorize` was the winner...
     if (winner.auth) {
       // ...we send Redux appropiate actions
-      yield put({ type: 'SET_AUTH', newAuthState: true }); // User is logged in (authorized)
+      yield put({ type: 'SET_AUTH', newAuthState: true, username }); // User is logged in (authorized)
       console.log('Login completed'); // Go to dashboard page
       browserHistory.push('/main');
       // If `logout` won...
     } else if (winner.logout) {
       // ...we send Redux appropiate action
-      yield put({ type: 'SET_AUTH', newAuthState: false }); // User is not logged in (not authorized)
+      yield put({ type: 'SET_AUTH', newAuthState: false, username: null }); // User is not logged in (not authorized)
       console.log('Logout called');
       // Go to root page
     }
@@ -99,7 +99,7 @@ export function *loginFlow() {
 export function *logoutFlow() {
   while (true) {
     yield take('LOGOUT');
-    yield put({ type: 'SET_AUTH', newAuthState: false });
+    yield put({ type: 'SET_AUTH', newAuthState: false, username: null });
 
     yield call(logout);
     browserHistory.push('/');
