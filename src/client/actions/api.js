@@ -27,5 +27,14 @@ export const login = (username, password) => {
 
 export const userLogout = () => {
   console.log('logging out');
+  fetch('/auth/logout', {
+    method: 'POST',
+  })
+      .then((result) => {
+        console.log('Result:', result);
+      })
+      .catch((error) => {
+        console.log("error: ", error);
+      })
   return true;
 };

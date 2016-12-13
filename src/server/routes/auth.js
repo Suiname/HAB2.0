@@ -59,4 +59,9 @@ router.post('/login', (req, res) => {
     })
 });
 
+router.post('/logout', (req, res) => {
+    console.log('Logout Server Side');
+    res.json({ message: 'Logged out' });
+});
+
 export default router;
