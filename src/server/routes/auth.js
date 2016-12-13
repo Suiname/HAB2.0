@@ -2,13 +2,33 @@
  * Created by jt on 11/23/16.
  */
 
-import { Router } from 'express'
-import account from '../models/account';
+import { Router } from 'express';
 import jwt from 'jsonwebtoken';
 import config from 'config';
+import request from 'request-promise';
+import account from '../models/account';
+
 const secret = config.get('secret');
 
-const router = Router()
+const router = Router();
+
+const check = (req, res) => {
+  jwt.verify(req.headers.authorization || req.params.token || req.body.token, secret, (err, decoded) => {
+    if (err) {
+      res.status(401).send();
+    } else {
+      request({
+        uri: `/v1/accounts/${decoded._username}`, // eslint-disable-line no-underscore-dangle
+      })
+        .then((username) => {
+          res.status(200).send(username);
+        })
+        .catch(() => {
+          res.status(500).send('failure');
+        });
+    }
+  });
+};
 
 router.get('/test', (req, res) => {
     res.end('hi')
