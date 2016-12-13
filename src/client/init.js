@@ -10,7 +10,7 @@ import './_static/css/main.css';
 
 injectTapEventPlugin();
 
-const store = configureStore({ loggedIn: false });
+const store = configureStore({ loggedIn: false, username: null });
 
 render((
   <Provider store={store} >
