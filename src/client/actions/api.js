@@ -1,6 +1,16 @@
 import 'es6-promise';
 import 'isomorphic-fetch';
 
+let localStorage;
+
+// If we're testing, use a local storage polyfill
+if (global.process && process.env.NODE_ENV === 'test') {
+  localStorage = require('localStorage');
+} else {
+  // If not, use the browser one
+  localStorage = global.window.localStorage;
+}
+
 export const register = (username, password) => {
   console.log('registering: ', username, password);
   return true;
@@ -8,7 +18,7 @@ export const register = (username, password) => {
 
 export const login = (username, password) => {
   console.log('logging in: ', username, password);
-  fetch('/auth/login', {
+  return fetch('/auth/login', {
     method: 'POST',
     body: JSON.stringify({ username, password }),
     headers: new Headers({
@@ -17,12 +27,16 @@ export const login = (username, password) => {
     }),
   })
   .then((result) => {
-    console.log('Result:', result);
+    return result.json();
+  })
+  .then((data) => {
+    console.log('Something: ', data);
+    localStorage.token = data.token;
+    return Promise.resolve(true);
   })
   .catch((error) => {
-    console.log("error: ", error);
-  })
-  return true;
+    console.log('error: ', error);
+  });
 };
 
 export const userLogout = () => {
@@ -31,10 +45,12 @@ export const userLogout = () => {
     method: 'POST',
   })
       .then((result) => {
-        console.log('Result:', result);
+        return result.json();
+      })
+      .then(() => {
+        return Promise.resolve(true);
       })
       .catch((error) => {
         console.log("error: ", error);
-      })
-  return true;
+      });
 };

@@ -29,34 +29,33 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    console.log("Trying login: ", req.body);
-    account.findOne({username: req.body.username}, (err, user) => {
-        if (err) {
-            return res.status(400).send();
-        }
-        console.log("Logging in with user: ", user)
-        if (!req.body.password){
-            console.log("no password");
-            return res.status(400).send();
-        }
-        user.comparePassword(req.body.password, (err, result) => {
-            if (err) {
-                return res.status(400).send();
-            }
-            if (!result){
-                return res.status(401).send();
-            }
-            const token = jwt.sign(user, secret, {
-                expiresIn: 1440 // expires in 24 hours
-            });
-            req.body.token = token;
-            return res.json({
-                success: true,
-                message: "Logged in",
-                token
-            });
-        })
-    })
+  console.log("Trying login: ", req.body);
+  account.findOne({username: req.body.username}, (err, user) => {
+    if (err) {
+      return res.status(400).send();
+    }
+    console.log("Logging in with user: ", user)
+    if (!req.body.password) {
+      console.log("no password");
+      return res.status(400).send();
+    }
+    user.comparePassword(req.body.password, (error, result) => {
+      if (error) {
+        return res.status(400).send();
+      }
+      if (!result) {
+        return res.status(401).send();
+      }
+      const token = jwt.sign(user, secret, {
+        expiresIn: 1440, // expires in 24 hours
+      });
+      return res.json({
+        success: true,
+        message: 'Logged in',
+        token,
+      });
+    });
+  });
 });
 
 router.post('/logout', (req, res) => {
