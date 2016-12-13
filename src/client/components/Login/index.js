@@ -20,6 +20,7 @@ Login.propTypes = {
 };
 
 function mapStateToProps(state) {
+  console.log("State: ", state);
   return {
     state,
   };

@@ -16,8 +16,29 @@ const headerStyle = {
 class LoginComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { username: '', password: '' };
+    this.login = this.login.bind(this);
     this.loginFunction = this.props.loginFunction;
     this.logoutFunction = this.props.logoutFunction;
+    this.passwordChange = this.passwordChange.bind(this);
+    this.usernameChange = this.usernameChange.bind(this);
+  }
+  login() {
+    this.loginFunction(this.state);
+  }
+  passwordChange(event) {
+    event.preventDefault();
+    const value = event.target.value;
+    this.setState((state) => {
+      state.password = value;
+    });
+  }
+  usernameChange(event) {
+    event.preventDefault();
+    const value = event.target.value;
+    this.setState((state) => {
+      state.username = value;
+    });
   }
   render() {
     return (
@@ -33,18 +54,18 @@ class LoginComponent extends React.Component {
             <div className="four columns" id="login_left_col">
               <div>
                 <label htmlFor="login_name">Login</label>
-                <input className="u-full-width" type="text" name="login_name" placeholder="Account Name" />
+                <input className="u-full-width" type="text" name="login_name" value={this.state.username} onChange={this.usernameChange} placeholder="Account Name" />
                 <label htmlFor="login_password">Password</label>
-                <input className="u-full-width" type="password" name="login_password" placeholder="Password" />
-                <input className="button-primary u-full-width" type="submit" className="login_button" value="ENTER APP" />
+                <input className="u-full-width" type="password" value={this.state.password} onChange={this.passwordChange} name="login_password" placeholder="Password" />
+                <button className="button-primary u-full-width" className="login_button" onClick={this.login} >Login</button>
+                <button className="button-primary u-full-width" className="logout_button" onClick={this.logoutFunction} >Logout</button>
               </div>
 
               <div>
                 <label htmlFor="create_account_name">Create Account</label>
-                <input className="u-full-width" type="text" name="create_account_name" placeholder="Account Name" />
-                <input className="u-full-width" type="password" name="create_account_password" placeholder="Password" />
-                <button className="button-primary u-full-width" className="login_button" onClick={this.loginFunction} >Login</button>
-                <button className="button-primary u-full-width" className="login_button" onClick={this.logoutFunction} >Logout</button>
+                <input className="u-full-width" type="text" name="regster_username" placeholder="Account Name" />
+                <input className="u-full-width" type="password" name="register_password" placeholder="Password" />
+                <button className="button-primary u-full-width" className="register_button" >Register</button>
               </div>
             </div>
 
@@ -68,6 +89,8 @@ class LoginComponent extends React.Component {
 LoginComponent.propTypes = {
   loginFunction: PropTypes.func,
   logoutFunction: PropTypes.func,
+  username: PropTypes.string,
+  dispatch: PropTypes.func,
 };
 
 export default LoginComponent;
