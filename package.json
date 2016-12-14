@@ -76,6 +76,7 @@
     "redux-devtools": "^3.2.0",
     "redux-saga": "^0.13.0",
     "redux-thunk": "^2.0.1",
+    "request-promise": "^4.1.1",
     "serve-favicon": "^2.3.0",
     "skeleton-css": "^2.0.4",
     "tape": "^4.6.2",

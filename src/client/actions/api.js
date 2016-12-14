@@ -16,28 +16,22 @@ export const register = (username, password) => {
   return true;
 };
 
-export const login = (username, password) => {
-  console.log('logging in: ', username, password);
-  return fetch('/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({ username, password }),
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    }),
-  })
+export const login = (username, password) => fetch('/auth/login', {
+  method: 'POST',
+  body: JSON.stringify({ username, password }),
+  headers: new Headers({
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  }),
+})
   .then(result => result.json())
   .then((data) => {
     localStorage.token = data.token;
     return Promise.resolve(true);
   })
-  .catch((error) => {
-    console.log('error: ', error);
-  });
-};
+  .catch(error => Promise.reject(error));
 
 export const userLogout = () => {
-  console.log('logging out');
   fetch('/auth/logout', {
     method: 'POST',
   })
@@ -46,6 +40,19 @@ export const userLogout = () => {
         Promise.resolve(true);
       })
       .catch((error) => {
-        console.log('error: ', error);
+        Promise.reject(error);
       });
+};
+
+export const authCheck = (nextState, replace, callback) => {
+  fetch('/auth/check', {
+    method: 'POST',
+    headers: { AUTHORIZATION: `${localStorage.token}` },
+  })
+  .then((result) => {
+    if (result.status !== 200) {
+      replace('/');
+    }
+    callback();
+  });
 };
