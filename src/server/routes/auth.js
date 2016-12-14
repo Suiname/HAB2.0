@@ -14,13 +14,13 @@ const router = Router();
 const check = (req, res) => {
   jwt.verify(req.headers.authorization || req.params.token || req.body.token, secret, (err, decoded) => {
     if (err) {
-      res.status(401).send();
+      return res.status(401).send();
     } else {
       account.findOne({ username: decoded._username }, (error, user) => { // eslint-disable-line no-underscore-dangle
-        if (error) {
-          res.status(500).send('failure');
+        if (error || !user) {
+          return res.status(500).send('failure');
         }
-        res.status(200).send(user);
+        return res.status(200).send(user);
       });
     }
   });
@@ -64,7 +64,7 @@ router.post('/login', (req, res) => {
       if (!result) {
         return res.status(401).send();
       }
-      const token = jwt.sign(user, secret, {
+      const token = jwt.sign({ _username: user.username }, secret, {
         expiresIn: 1440, // expires in 24 hours
       });
       return res.json({
