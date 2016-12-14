@@ -1,5 +1,6 @@
 import 'es6-promise';
 import 'isomorphic-fetch';
+import { browserHistory } from 'react-router';
 
 let localStorage;
 
@@ -48,4 +49,17 @@ export const userLogout = () => {
       .catch((error) => {
         console.log('error: ', error);
       });
+};
+
+export const authCheck = () => {
+  fetch('/auth/check', {
+    method: 'POST',
+    headers: { AUTHORIZATION: `${localStorage.token}` },
+  })
+  .then(result => {
+    console.log('Result', result);
+    if (result.status !== 200) {
+      browserHistory.push('/');
+    }
+  });
 };

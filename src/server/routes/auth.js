@@ -5,7 +5,6 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
 import config from 'config';
-import request from 'request-promise';
 import account from '../models/account';
 
 const secret = config.get('secret');
@@ -17,22 +16,21 @@ const check = (req, res) => {
     if (err) {
       res.status(401).send();
     } else {
-      request({
-        uri: `/v1/accounts/${decoded._username}`, // eslint-disable-line no-underscore-dangle
-      })
-        .then((username) => {
-          res.status(200).send(username);
-        })
-        .catch(() => {
+      account.findOne({ username: decoded._username }, (error, user) => { // eslint-disable-line no-underscore-dangle
+        if (error) {
           res.status(500).send('failure');
-        });
+        }
+        res.status(200).send(user);
+      });
     }
   });
 };
 
+router.post('/check', check);
+
 router.get('/test', (req, res) => {
-    res.end('hi')
-})
+  res.end('hi');
+});
 
 router.get('/tester', (req, res) => {
     res.json({test: 'test', what: 'what'});
