@@ -4,6 +4,7 @@ import LeagueComponent from './League';
 
 class League extends React.Component {
   render() {
+    console.log(`State at League render: ${this.state}`);
     if (!this.props) {
       return null;
     }
@@ -20,8 +21,8 @@ League.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    username: state.username,
-    loggedIn: state.loggedIn,
+    username: state.appState.username,
+    loggedIn: state.appState.loggedIn,
   };
 }
 
