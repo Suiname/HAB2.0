@@ -56,3 +56,7 @@ export const authCheck = (nextState, replace, callback) => {
     callback();
   });
 };
+
+export const returnVerify = () => {
+  // TODO implement this to verify a returning user with a JWT
+};
