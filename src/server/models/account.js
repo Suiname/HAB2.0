@@ -30,16 +30,16 @@ userSchema.pre('save', function (next) {
   if (!user.isModified('password')) return next();
 
     // generate a salt
-  bcrypt.genSalt(saltRounds, (err, salt) => {
+  return bcrypt.genSalt(saltRounds, (err, salt) => {
     if (err) return next(err);
 
         // hash the password using our new salt
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) return next(err);
+    return bcrypt.hash(user.password, salt, (error, hash) => {
+      if (error) return next(error);
 
             // override the cleartext password with the hashed one
       user.password = hash;
-      next();
+      return next();
     });
   });
 });
@@ -47,7 +47,7 @@ userSchema.pre('save', function (next) {
 userSchema.methods.comparePassword = function (candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     if (err) return cb(err);
-    cb(null, isMatch);
+    return cb(null, isMatch);
   });
 };
 
