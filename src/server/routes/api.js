@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authcheck } from '../middleware';
+import authcheck from '../middleware';
 
 const router = Router();
 

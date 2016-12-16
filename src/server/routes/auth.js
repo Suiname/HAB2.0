@@ -33,31 +33,31 @@ router.get('/test', (req, res) => {
 });
 
 router.get('/tester', (req, res) => {
-    res.json({test: 'test', what: 'what'});
-})
+  res.json({ test: 'test', what: 'what' });
+});
 
 router.post('/register', (req, res) => {
-    console.log("Req.body: ", req.body);
-    account.create({username: req.body.username, email: req.body.email, password:req.body.password}, (err, user) => {
-        if (err) {
-            res.sendStatus(400).send();
-        }
-        res.sendStatus(201).send();
-    });
+  console.log('Req.body: ', req.body);
+  account.create({ username: req.body.username, email: req.body.email, password: req.body.password }, (err, user) => {
+    if (err) {
+      res.sendStatus(400).send();
+    }
+    res.sendStatus(201).send(user.username);
+  });
 });
 
 router.post('/login', (req, res) => {
-  console.log("Trying login: ", req.body);
-  account.findOne({username: req.body.username}, (err, user) => {
+  console.log('Trying login: ', req.body);
+  return account.findOne({ username: req.body.username }, (err, user) => {
     if (err) {
       return res.status(400).send();
     }
-    console.log("Logging in with user: ", user)
+    console.log('Logging in with user: ', user);
     if (!req.body.password) {
-      console.log("no password");
+      console.log('no password');
       return res.status(400).send();
     }
-    user.comparePassword(req.body.password, (error, result) => {
+    return user.comparePassword(req.body.password, (error, result) => {
       if (error) {
         return res.status(400).send();
       }
@@ -77,8 +77,8 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-    console.log('Logout Server Side');
-    res.json({ message: 'Logged out' });
+  console.log('Logout Server Side');
+  res.json({ message: 'Logged out' });
 });
 
 export default router;

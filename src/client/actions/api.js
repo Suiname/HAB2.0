@@ -58,12 +58,12 @@ export const authCheck = (nextState, replace, callback) => {
   });
 };
 
-export const returnVerify = () => {
+export const returnVerify = () =>
   // TODO implement this to verify a returning user with a JWT
-  return fetch('/auth/check', {
-    method: 'POST',
-    headers: { AUTHORIZATION: `${localStorage.token}` },
-  })
+   fetch('/auth/check', {
+     method: 'POST',
+     headers: { AUTHORIZATION: `${localStorage.token}` },
+   })
   .then((result) => {
     if (result.status !== 200) {
       delete localStorage.token;
@@ -79,4 +79,3 @@ export const returnVerify = () => {
   .catch((error) => {
     console.log(error);
   });
-};
