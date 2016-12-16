@@ -1,5 +1,6 @@
 import 'es6-promise';
 import 'isomorphic-fetch';
+import { browserHistory } from 'react-router';
 
 let localStorage;
 
@@ -59,6 +60,23 @@ export const authCheck = (nextState, replace, callback) => {
 
 export const returnVerify = () => {
   // TODO implement this to verify a returning user with a JWT
-  console.log("Verifying");
-  return { username: 'test' };
+  return fetch('/auth/check', {
+    method: 'POST',
+    headers: { AUTHORIZATION: `${localStorage.token}` },
+  })
+  .then((result) => {
+    if (result.status !== 200) {
+      delete localStorage.token;
+      browserHistory.push('/');
+      return { username: null };
+    }
+    return result.json();
+  })
+  .then((decodedUser) => {
+    console.log(`decodedUser: ${JSON.stringify(decodedUser)}`);
+    return { username: 'test' };
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 };

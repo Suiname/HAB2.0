@@ -20,7 +20,8 @@ const check = (req, res) => {
         if (error || !user) {
           return res.status(500).send('failure');
         }
-        return res.status(200).send(user);
+        console.log(`user: ${user}`);
+        return res.status(200).json({ username: user.username });
       });
     }
   });

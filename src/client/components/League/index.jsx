@@ -6,7 +6,9 @@ import { returningUser } from '../../actions';
 
 class League extends React.Component {
   componentWillMount() {
-    this.props.returningUser({ username: 'test' });
+    if (!this.props.username) {
+      this.props.returningUser();
+    }
   }
   render() {
     console.log(`State at League render: ${this.state}`);
