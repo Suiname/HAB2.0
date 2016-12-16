@@ -1,17 +1,18 @@
-import React, {PropTypes} from 'react'
-import { connect } from 'react-redux'
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {onIncrement, onDecrement, onIncrementAsync} from '../actions';
+import { onIncrement, onDecrement, onIncrementAsync } from '../actions';
 import Counter from './Counter';
 
-class Root extends React.Component{
-  render(){
+class Root extends React.Component {
+  render() {
     return (
       <Counter
         value={this.props.value}
         onIncrement={this.props.onIncrement}
         onDecrement={this.props.onDecrement}
-        onIncrementAsync={this.props.onIncrementAsync} />
+        onIncrementAsync={this.props.onIncrementAsync}
+      />
     );
   }
 }

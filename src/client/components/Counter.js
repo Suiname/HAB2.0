@@ -1,11 +1,11 @@
-/*eslint-disable no-unused-vars */
-import React, { Component, PropTypes } from 'react'
+/* eslint-disable no-unused-vars */
+import React, { Component, PropTypes } from 'react';
 
 class Counter extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
-  render(){
+  render() {
     return (
       <div>
         <button onClick={this.props.onIncrement.bind(this)}>
@@ -20,7 +20,7 @@ class Counter extends Component {
         <hr />
         <div>Clicked: {this.props.value} times</div>
       </div>
-    )
+    );
   }
 }
 
