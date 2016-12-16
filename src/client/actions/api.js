@@ -74,7 +74,7 @@ export const returnVerify = () => {
   })
   .then((decodedUser) => {
     console.log(`decodedUser: ${JSON.stringify(decodedUser)}`);
-    return { username: 'test' };
+    return decodedUser;
   })
   .catch((error) => {
     console.log(error);

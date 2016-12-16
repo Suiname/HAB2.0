@@ -15,15 +15,14 @@ const check = (req, res) => {
   jwt.verify(req.headers.authorization || req.params.token || req.body.token, secret, (err, decoded) => {
     if (err) {
       return res.status(401).send();
-    } else {
-      account.findOne({ username: decoded._username }, (error, user) => { // eslint-disable-line no-underscore-dangle
-        if (error || !user) {
-          return res.status(500).send('failure');
-        }
-        console.log(`user: ${user}`);
-        return res.status(200).json({ username: user.username });
-      });
     }
+    return account.findOne({ username: decoded._username }, (error, user) => { // eslint-disable-line no-underscore-dangle
+      if (error || !user) {
+        return res.status(500).send('failure');
+      }
+      console.log(`user: ${user}`);
+      return res.status(200).json({ username: user.username });
+    });
   });
 };
 
