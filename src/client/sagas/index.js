@@ -1,7 +1,7 @@
 import { takeEvery, delay } from 'redux-saga';
 import { put, call, fork, race, take } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
-import { register, login, userLogout } from '../actions/api';
+import { register, login, userLogout, returnVerify } from '../actions/api';
 
 // Our worker Saga: will perform the async increment task
 export function *incrementAsync() {
@@ -106,11 +106,20 @@ export function *logoutFlow() {
   }
 }
 
+export function *returningUser() {
+  while (true) {
+    yield take('RETURNING');
+    const user = yield call(returnVerify);
+    console.log("User User: ", user);
+    yield put({ type: 'SET_AUTH', newAuthState: true, username: user.username || 'test' });
+  }
+}
 
 export default function *rootSaga() {
   yield [
     watchIncrementAsync(),
     fork(loginFlow),
     fork(logoutFlow),
+    fork(returningUser),
   ];
 }
