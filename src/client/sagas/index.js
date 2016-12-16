@@ -108,8 +108,10 @@ export function *logoutFlow() {
 
 export function *returningUser() {
   while (true) {
-    yield take('RETUNING');
-    yield call(returnVerify);
+    yield take('RETURNING');
+    const user = yield call(returnVerify);
+    console.log("User User: ", user);
+    yield put({ type: 'SET_AUTH', newAuthState: true, username: user.username || 'test' });
   }
 }
 
@@ -118,5 +120,6 @@ export default function *rootSaga() {
     watchIncrementAsync(),
     fork(loginFlow),
     fork(logoutFlow),
+    fork(returningUser),
   ];
 }

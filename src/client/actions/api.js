@@ -59,4 +59,6 @@ export const authCheck = (nextState, replace, callback) => {
 
 export const returnVerify = () => {
   // TODO implement this to verify a returning user with a JWT
+  console.log("Verifying");
+  return { username: 'test' };
 };
