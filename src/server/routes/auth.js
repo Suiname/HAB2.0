@@ -42,13 +42,13 @@ router.post('/register', (req, res) => {
     if (err) {
       res.sendStatus(400).send();
     }
-    res.sendStatus(201).send();
+    res.sendStatus(201).send(user.username);
   });
 });
 
 router.post('/login', (req, res) => {
   console.log('Trying login: ', req.body);
-  account.findOne({ username: req.body.username }, (err, user) => {
+  return account.findOne({ username: req.body.username }, (err, user) => {
     if (err) {
       return res.status(400).send();
     }
@@ -57,7 +57,7 @@ router.post('/login', (req, res) => {
       console.log('no password');
       return res.status(400).send();
     }
-    user.comparePassword(req.body.password, (error, result) => {
+    return user.comparePassword(req.body.password, (error, result) => {
       if (error) {
         return res.status(400).send();
       }
