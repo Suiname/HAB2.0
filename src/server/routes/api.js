@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import authcheck from '../middleware';
+import league from '../models/league';
 
 const router = Router();
 
@@ -23,6 +24,34 @@ router.get('/test', (req, res) => {
 
 router.get('/tester', (req, res) => {
   res.json({ test: 'test', what: 'what' });
+});
+
+// League CRUD routes
+router.get('/league', (req, res) => {
+  league.find({}, (err, leagueList) => {
+    if (err) {
+      return err;
+    }
+    return res.json(leagueList);
+  });
+});
+
+router.get('/league/:id', (req, res) => {
+  league.findOne({ _id: req.params.id }, (err, result) => {
+    if (err) {
+      res.status(400).send(err);
+    }
+    res.json(result);
+  });
+});
+
+router.post('/league/', (req, res) => {
+  league.create({ name: req.body.name, users: [req.body.user1, req.body.user2] }, (err, result) => {
+    if (err) {
+      res.status(400).send(err);
+    }
+    res.json(result);
+  });
 });
 
 export default router;

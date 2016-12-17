@@ -12,7 +12,7 @@ const authcheck = (req, res, next) => {
         // verifies secret and checks exp
     return jwt.verify(token, secret, (err, decoded) => {
       if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });
+        return res.status(401).json({ success: false, message: 'Failed to authenticate token.' });
       }
       // if everything is good, save to request for use in other routes
       req.decoded = decoded;
