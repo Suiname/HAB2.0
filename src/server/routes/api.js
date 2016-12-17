@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import authcheck from '../middleware';
+import league from '../models/league';
 
 const router = Router();
 
@@ -23,6 +24,15 @@ router.get('/test', (req, res) => {
 
 router.get('/tester', (req, res) => {
   res.json({ test: 'test', what: 'what' });
+});
+
+router.get('/league', (req, res) => {
+  league.find({}, (err, leagueList) => {
+    if (err) {
+      return err;
+    }
+    return res.json(leagueList);
+  });
 });
 
 export default router;
