@@ -15,11 +15,13 @@ const headerStyle = {
   backgroundImage: `url(${grass})`,
 };
 
+import CreateComponent from './Create';
+
 class LeagueComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
+    if (!this.props) {
+      return null;
+    }
     console.log("Props: ", this.props);
     return (
       <div id="league_wrapper" style={style}>
@@ -34,23 +36,14 @@ class LeagueComponent extends React.Component {
           <div className="row">
             <div className="twelve columns">
 
-              <h2><strong>Welcome back {this.props.loggedIn ? this.props.username : "Person"}</strong></h2>
-              <h4>Create a new league, draft for a league you've been invited to or simulate a season for a league you've already joined!</h4>
-
-              <div className="header create">Create a new league and invite friends!</div>
-              <div id="createLeague" className="inline" action="/league/create" method="post">
-                <input id="league_name" className="formInput" type="text" name="league_name" placeholder="League Name" />
-                <input id="owner_one" className="formInput" type="text" name="team1_owner" placeholder="Team 1 Owner" />
-                <input id="owner_two" className="formInput" type="text" name="team2_owner" placeholder="Team 2 Owner" />
-                <button className="button-primary formInput" type="button">submit</button>
-              </div>
-              <div className="header notDrafted">You've been invited to draft in these leagues!</div>
-              <div id="notDrafted">
-              </div>
-              <div className="header drafted">You're part of the following leagues</div>
-              <div id="drafted">
-              </div>
-
+              <h2><strong>Welcome back {this.props.loggedIn ? this.props.username : 'Person'}</strong></h2>
+              <h4>Create a new league, draft for a league you&apos;ve been invited to or simulate a season for a league you&apos;ve already joined!</h4>
+              {/* Create component goes here*/}
+              <CreateComponent />
+              <div className="header notDrafted">You&apos;ve been invited to draft in these leagues!</div>
+              <div id="notDrafted" />
+              <div className="header drafted">You&apos;re part of the following leagues</div>
+              <div id="drafted" />
             </div>
           </div>
         </div>
