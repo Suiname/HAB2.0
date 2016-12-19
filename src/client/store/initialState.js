@@ -13,4 +13,9 @@ export default {
     username: null,
     loggedIn: !!localStorage.token,
   },
+  leagueState: {
+    leagueName: '',
+    team1: '',
+    maxPlayers: 0,
+  },
 };

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LeagueComponent from './League';
-import { returningUser } from '../../actions';
+import { returningUser, createLeague } from '../../actions';
 
 class League extends React.Component {
   componentWillMount() {
@@ -16,7 +16,7 @@ class League extends React.Component {
       return null;
     }
     return (
-      <LeagueComponent username={this.props.username} loggedIn={this.props.loggedIn} />
+      <LeagueComponent username={this.props.username} loggedIn={this.props.loggedIn} createLeague={this.props.createLeague} />
     );
   }
 }
@@ -35,7 +35,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ returningUser }, dispatch);
+  return bindActionCreators({ returningUser, createLeague }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(League);

@@ -11,10 +11,19 @@ const appState = (state = { loggedIn: false, username: null }, action) => {
       return state;
   }
 };
+const leagueState = (state = { leagueName: '', team1: '', maxPlayers: 0 }, action) => {
+  switch (action.type) {
+    case 'SUBMIT':
+      return { leagueName: action.leagueName, team1: action.team1, maxPlayers: action.maxPlayers };
+    default:
+      return state;
+  }
+};
 
 const rootReducer = combineReducers({
   routing: routerReducer,
   appState,
+  leagueState,
 });
 
 export default rootReducer;
