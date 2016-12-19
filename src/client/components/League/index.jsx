@@ -25,6 +25,7 @@ League.propTypes = {
   username: PropTypes.string,
   loggedIn: PropTypes.bool,
   returningUser: PropTypes.func,
+  createLeague: PropTypes.func,
 };
 
 function mapStateToProps(state) {
