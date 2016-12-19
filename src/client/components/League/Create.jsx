@@ -5,6 +5,8 @@ class CreateComponent extends React.Component {
     super(props);
     this.update = this.update.bind(this);
     this.updateLeague = this.updateLeague.bind(this);
+    this.updateTeam = this.updateTeam.bind(this);
+    this.updateMax = this.updateMax.bind(this);
     this.submit = this.submit.bind(this);
     this.createLeague = this.props.createLeague;
     this.state = { leagueName: '', team1: '', maxPlayers: 0 };
@@ -26,6 +28,18 @@ class CreateComponent extends React.Component {
     const value = event.target.value;
     this.update(value, 'leagueName');
   }
+  updateTeam(event) {
+    event.preventDefault();
+    console.log(event.target.value);
+    const value = event.target.value;
+    this.update(value, 'team1');
+  }
+  updateMax(event) {
+    event.preventDefault();
+    console.log(event.target.value);
+    const value = event.target.value;
+    this.update(value, 'maxPlayers');
+  }
   render() {
     console.log("Props in Create  : ", this.props);
     console.log("this.props.")
@@ -34,8 +48,8 @@ class CreateComponent extends React.Component {
         <div className="header create">Create a new league and invite friends!</div>
         <div id="createLeague" className="inline" action="/league/create" method="post">
           <input id="league_name" className="formInput" value={this.state.leagueName} onChange={this.updateLeague} type="text" name="league_name" placeholder="League Name" />
-          <input id="owner_one" className="formInput" type="text" value={this.state.team1} name="team1_owner" placeholder="Team 1 Owner" />
-          <input id="max_players" className="formInput" type="text" name="max_players" value={this.state.maxPlayers} placeholder="Max Players" />
+          <input id="owner_one" className="formInput" type="text" value={this.state.team1} onChange={this.updateTeam} name="team1_owner" placeholder="Team 1 Owner" />
+          <input id="max_players" className="formInput" type="text" name="max_players" onChange={this.updateMax} value={this.state.maxPlayers} placeholder="Max Players" />
           <button className="button-primary formInput" onClick={this.submit} type="button">submit</button>
         </div>
       </div>
