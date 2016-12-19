@@ -79,3 +79,25 @@ export const returnVerify = () =>
   .catch((error) => {
     console.log(error);
   });
+
+export const createLeague = (leagueState) => {
+  const name = leagueState.leagueName;
+  const owner = leagueState.team1;
+  const size = leagueState.maxPlayers;
+  fetch('/api/league', {
+    method: 'POST',
+    headers: { 'x-access-token': `${localStorage.token}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json' },
+    body: JSON.stringify({ name, owner, size }),
+  })
+  .then((result) => {
+    return result.json();
+  })
+  .then((decoded) => {
+    return decoded;
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+};

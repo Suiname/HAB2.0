@@ -11,6 +11,10 @@ const leagueSchema = new Schema({
     type: [String],
     required: true,
   },
+  size: {
+    type: Number,
+    required: true,
+  },
 });
 
 export default mongoose.model('league', leagueSchema, 'leagues');
