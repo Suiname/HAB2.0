@@ -46,7 +46,7 @@ router.get('/league/:id', (req, res) => {
 });
 
 router.post('/league/', (req, res) => {
-  league.create({ name: req.body.name, users: [req.body.user1, req.body.user2] }, (err, result) => {
+  league.create({ name: req.body.name, users: [req.body.owner], size: req.body.size }, (err, result) => {
     if (err) {
       res.status(400).send(err);
     }
