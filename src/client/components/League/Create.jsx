@@ -10,8 +10,6 @@ class CreateComponent extends React.Component {
     this.state = { leagueName: '', team1: '', maxPlayers: 0 };
   }
   update(value, key) {
-    console.log("value: ", value);
-    console.log("Key: ", key);
     this.setState((state) => {
       state[key] = value;
     });
@@ -22,7 +20,6 @@ class CreateComponent extends React.Component {
   }
   updateLeague(event) {
     event.preventDefault();
-    console.log(event.target.value);
     const value = event.target.value;
     const id = event.target.id;
     switch (id) {
@@ -40,8 +37,6 @@ class CreateComponent extends React.Component {
     }
   }
   render() {
-    console.log("Props in Create  : ", this.props);
-    console.log("this.props.")
     return (
       <div id="create_wrapper">
         <div className="header create">Create a new league and invite friends!</div>
