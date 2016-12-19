@@ -118,9 +118,7 @@ export function *returningUser() {
 export function *leagueFlow() {
   while (true) {
     const leagueInfo = yield take('SUBMIT');
-    console.log("League INFO: ", leagueInfo);
     const { leagueName, team1, maxPlayers } = leagueInfo.leagueState;
-    console.log("League name: ", leagueName);
     yield call(createLeague, { leagueName, team1, maxPlayers });
   }
 }

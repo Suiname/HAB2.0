@@ -84,7 +84,6 @@ export const createLeague = (leagueState) => {
   const name = leagueState.leagueName;
   const owner = leagueState.team1;
   const size = leagueState.maxPlayers;
-  console.log(`Creating League ${name} for ${owner} with ${size} players`);
   fetch('/api/league', {
     method: 'POST',
     headers: { 'x-access-token': `${localStorage.token}`,
@@ -93,11 +92,9 @@ export const createLeague = (leagueState) => {
     body: JSON.stringify({ name, owner, size }),
   })
   .then((result) => {
-    console.log("Result of League Post: ", result);
     return result.json();
   })
   .then((decoded) => {
-    console.log("Decoded League: ", decoded);
     return decoded;
   })
   .catch((error) => {
