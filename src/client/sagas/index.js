@@ -111,7 +111,7 @@ export function *returningUser() {
     yield take('RETURNING');
     const user = yield call(returnVerify);
     console.log('User User: ', user);
-    yield put({ type: 'SET_AUTH', newAuthState: true, username: user.username });
+    yield put({ type: 'SET_AUTH', newAuthState: true, username: user.username, userID: user.userID });
   }
 }
 

@@ -11,6 +11,7 @@ if (global.process && process.env.NODE_ENV === 'test') {
 export default {
   appState: {
     username: null,
+    userID: null,
     loggedIn: !!localStorage.token,
   },
   leagueState: {

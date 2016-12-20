@@ -9,7 +9,7 @@ import account from '../models/account';
 
 const secret = config.get('secret');
 
-const router = Router();
+const router = new Router();
 
 const check = (req, res) => {
   jwt.verify(req.headers.authorization || req.params.token || req.body.token, secret, (err, decoded) => {
@@ -21,7 +21,7 @@ const check = (req, res) => {
         return res.status(500).send('failure');
       }
       console.log(`user: ${user}`);
-      return res.status(200).json({ username: user.username });
+      return res.status(200).json({ username: user.username, userID: user._id }); // eslint-disable-line no-underscore-dangle
     });
   });
 };
@@ -64,7 +64,7 @@ router.post('/login', (req, res) => {
       if (!result) {
         return res.status(401).send();
       }
-      const token = jwt.sign({ _username: user.username }, secret, {
+      const token = jwt.sign({ _username: user.username, userID: user._id }, secret, { // eslint-disable-line no-underscore-dangle
         expiresIn: 1440, // expires in 24 hours
       });
       return res.json({

@@ -39,7 +39,7 @@ class LeagueComponent extends React.Component {
               <h2><strong>Welcome back {this.props.loggedIn ? this.props.username : 'Person'}</strong></h2>
               <h4>Create a new league, draft for a league you&apos;ve been invited to or simulate a season for a league you&apos;ve already joined!</h4>
               {/* Create component goes here*/}
-              <CreateComponent createLeague={this.props.createLeague} />
+              <CreateComponent createLeague={this.props.createLeague} userID={this.props.userID} />
               <div className="header notDrafted">You&apos;ve been invited to draft in these leagues!</div>
               <div id="notDrafted" />
               <div className="header drafted">You&apos;re part of the following leagues</div>
@@ -55,6 +55,7 @@ class LeagueComponent extends React.Component {
 LeagueComponent.propTypes = {
   loggedIn: PropTypes.bool,
   username: PropTypes.string,
+  userID: PropTypes.string,
   createLeague: PropTypes.func,
 };
 

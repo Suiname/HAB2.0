@@ -4,9 +4,9 @@ import { combineReducers } from 'redux';
 const appState = (state = { loggedIn: false, username: null }, action) => {
   switch (action.type) {
     case 'SET_AUTH':
-      return { loggedIn: action.newAuthState, username: action.username };
+      return { loggedIn: action.newAuthState, username: action.username, userID: action.userID };
     case 'RETURNING':
-      return { loggedIn: state.loggedIn, username: action.username };
+      return { loggedIn: state.loggedIn, username: action.username, userID: action.userID };
     default:
       return state;
   }

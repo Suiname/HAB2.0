@@ -15,7 +15,7 @@ class CreateComponent extends React.Component {
     });
   }
   submit() {
-    console.log("State on submit: ", this.state);
+    console.log('State on submit: ', this.state);
     this.createLeague(this.state);
   }
   updateLeague(event) {
@@ -42,7 +42,7 @@ class CreateComponent extends React.Component {
         <div className="header create">Create a new league and invite friends!</div>
         <div id="createLeague" className="inline" action="/league/create" method="post">
           <input id="league_name" className="formInput" value={this.state.leagueName} onChange={this.updateLeague} type="text" name="league_name" placeholder="League Name" />
-          <input id="owner_one" className="formInput" type="text" value={this.state.team1} onChange={this.updateLeague} name="team1_owner" placeholder="Team 1 Owner" />
+          <input id="owner_one" className="formInput" type="hidden" value={this.props.userID} name="team1_owner" placeholder="Team 1 Owner" />
           <input id="max_players" className="formInput" type="text" name="max_players" onChange={this.updateLeague} value={this.state.maxPlayers} placeholder="Max Players" />
           <button className="button-primary formInput" onClick={this.submit} type="button">submit</button>
         </div>
@@ -53,6 +53,7 @@ class CreateComponent extends React.Component {
 
 CreateComponent.propTypes = {
   createLeague: PropTypes.func,
+  userID: PropTypes.string,
 };
 
 export default CreateComponent;

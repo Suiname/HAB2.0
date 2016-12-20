@@ -16,13 +16,14 @@ class League extends React.Component {
       return null;
     }
     return (
-      <LeagueComponent username={this.props.username} loggedIn={this.props.loggedIn} createLeague={this.props.createLeague} />
+      <LeagueComponent username={this.props.username} loggedIn={this.props.loggedIn} createLeague={this.props.createLeague} userID={this.props.userID} />
     );
   }
 }
 
 League.propTypes = {
   username: PropTypes.string,
+  userID: PropTypes.string,
   loggedIn: PropTypes.bool,
   returningUser: PropTypes.func,
   createLeague: PropTypes.func,
@@ -31,6 +32,7 @@ League.propTypes = {
 function mapStateToProps(state) {
   return {
     username: state.appState.username,
+    userID: state.appState.userID,
     loggedIn: state.appState.loggedIn,
   };
 }
