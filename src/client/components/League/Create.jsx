@@ -8,21 +8,18 @@ class CreateComponent extends React.Component {
     this.updateLeague = this.updateLeague.bind(this);
     this.submit = this.submit.bind(this);
     this.createLeague = this.props.createLeague;
-    this.state = { leagueName: '', team1: props.userID, maxPlayers: 0 };
+    this.state = { leagueName: '', maxPlayers: 0 };
   }
   update(value, key) {
     this.setState((state) => {
       state[key] = value;
     });
   }
-  ComponentDidUpdate(prevProps, prevState) {
-    if (prevProps.userID !== this.props.userID) {
-      this.state.team1 = this.props.userID;
-    }
-  }
   submit() {
     console.log('State on submit: ', this.state);
-    this.createLeague(this.state);
+    console.log('Props on submit: ', this.props);
+    const league = { leagueName: this.state.leagueName, maxPlayers: this.state.maxPlayers, team1: this.props.userID };
+    this.createLeague(league);
     this.setState((state) => {
       state.leagueName = '';
       state.maxPlayers = 0;
