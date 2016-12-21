@@ -70,6 +70,7 @@ router.post('/login', (req, res) => {
       return res.json({
         success: true,
         message: 'Logged in',
+        userID: user._id, // eslint-disable-line no-underscore-dangle
         token,
       });
     });

@@ -83,7 +83,9 @@ export function *loginFlow() {
     // If `authorize` was the winner...
     if (winner.auth) {
       // ...we send Redux appropiate actions
-      yield put({ type: 'SET_AUTH', newAuthState: true, username }); // User is logged in (authorized)
+      console.log('Winner: ', winner);
+      console.log('Request: ', request);
+      yield put({ type: 'SET_AUTH', newAuthState: true, username, userID: winner.auth }); // User is logged in (authorized)
       console.log('Login completed'); // Go to dashboard page
       browserHistory.push('/main');
       // If `logout` won...

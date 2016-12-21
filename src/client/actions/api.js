@@ -28,7 +28,7 @@ export const login = (username, password) => fetch('/auth/login', {
   .then(result => result.json())
   .then((data) => {
     localStorage.token = data.token;
-    return Promise.resolve(true);
+    return data.userID;
   })
   .catch(error => Promise.reject(error));
 
