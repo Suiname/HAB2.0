@@ -54,4 +54,13 @@ router.post('/league/', (req, res) => {
   });
 });
 
+router.get('/league/byMember/:id', (req, res) => {
+  league.find({ $where: `this.users.indexOf("${req.params.id}") != -1` }, (err, result) => {
+    if (err) {
+      res.status(400).send(err);
+    }
+    res.json(result);
+  });
+});
+
 export default router;
