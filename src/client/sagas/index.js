@@ -1,7 +1,7 @@
 import { takeEvery, delay } from 'redux-saga';
 import { put, call, fork, race, take } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
-import { register, login, userLogout, returnVerify, createLeague } from '../actions/api';
+import { register, login, userLogout, returnVerify, createLeague, leagueList } from '../actions/api';
 
 // Our worker Saga: will perform the async increment task
 export function *incrementAsync() {
@@ -122,6 +122,10 @@ export function *leagueFlow() {
     const leagueInfo = yield take('SUBMIT');
     const { leagueName, team1, maxPlayers } = leagueInfo.leagueState;
     yield call(createLeague, { leagueName, team1, maxPlayers });
+
+    const userID = yield take('LEAGUE_LIST');
+    const list = yield call(leagueList, userID);
+    yield put({ type: 'RETURN_LEAGUES', list });
   }
 }
 

@@ -101,3 +101,21 @@ export const createLeague = (leagueState) => {
     console.log(error);
   });
 };
+
+export const leagueList = (userID) => {
+  fetch(`/api/league/byMember/${userID}`, {
+    method: 'GET',
+    headers: { 'x-access-token': `${localStorage.token}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json' },
+  })
+  .then((result) => {
+    return result.json();
+  })
+  .then((json) => {
+    return json;
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+};

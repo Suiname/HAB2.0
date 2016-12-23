@@ -11,10 +11,14 @@ const appState = (state = { loggedIn: false, username: null }, action) => {
       return state;
   }
 };
-const leagueState = (state = { leagueName: '', team1: '', maxPlayers: 0 }, action) => {
+const leagueState = (state = { leagueName: '', team1: '', maxPlayers: 0, leagueList: [] }, action) => {
   switch (action.type) {
     case 'SUBMIT':
-      return { leagueName: action.leagueName, team1: action.team1, maxPlayers: action.maxPlayers };
+      return { leagueName: action.leagueName, team1: action.team1, maxPlayers: action.maxPlayers, leagueList: state.leagueList };
+    case 'LEAGUE_LIST':
+      return state;
+    case 'RETURN_LEAGUES':
+      return { leagueName: state.leagueName, team1: state.team1, maxPlayers: state.maxPlayers, leagueList: action.leagues };
     default:
       return state;
   }

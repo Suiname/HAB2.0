@@ -41,7 +41,7 @@ class LeagueComponent extends React.Component {
               <h4>Create a new league, draft for a league you&apos;ve been invited to or simulate a season for a league you&apos;ve already joined!</h4>
               {/* Create component goes here*/}
               <CreateComponent createLeague={this.props.createLeague} userID={this.props.userID} />
-              <LeagueList />
+              <LeagueList leagues={this.props.leagues} />
             </div>
           </div>
         </div>
@@ -55,6 +55,7 @@ LeagueComponent.propTypes = {
   username: PropTypes.string,
   userID: PropTypes.string,
   createLeague: PropTypes.func,
+  leagues: PropTypes.array,
 };
 
 export default LeagueComponent;

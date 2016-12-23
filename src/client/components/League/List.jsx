@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 class LeagueList extends React.Component {
+  componentDidUpdate() {
+    console.log('League List Refresh');
+  }
   render() {
     if (!this.props) {
       return null;
@@ -15,5 +18,9 @@ class LeagueList extends React.Component {
     );
   }
 }
+
+LeagueList.propTypes = {
+  leagues: PropTypes.array,
+};
 
 export default LeagueList;
