@@ -8,6 +8,8 @@ class League extends React.Component {
   componentWillMount() {
     if (!this.props.username) {
       this.props.returningUser();
+    } else if (this.props.leagues.length === 0) {
+      this.props.leagueList(this.props.username);
     }
   }
   render() {
