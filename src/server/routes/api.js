@@ -2,7 +2,7 @@ import { Router } from 'express';
 import authcheck from '../middleware';
 import league from '../models/league';
 
-const router = Router();
+const router = new Router();
 
 const todos = [
   'Work out',
