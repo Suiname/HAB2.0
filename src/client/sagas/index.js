@@ -1,7 +1,7 @@
 import { takeEvery, delay } from 'redux-saga';
 import { put, call, fork, race, take } from 'redux-saga/effects';
 import { browserHistory } from 'react-router';
-import { register, login, userLogout, returnVerify, createLeague } from '../actions/api';
+import { register, login, userLogout, returnVerify, createLeague, leagueList } from '../actions/api';
 
 // Our worker Saga: will perform the async increment task
 export function *incrementAsync() {
@@ -83,7 +83,9 @@ export function *loginFlow() {
     // If `authorize` was the winner...
     if (winner.auth) {
       // ...we send Redux appropiate actions
-      yield put({ type: 'SET_AUTH', newAuthState: true, username }); // User is logged in (authorized)
+      console.log('Winner: ', winner);
+      console.log('Request: ', request);
+      yield put({ type: 'SET_AUTH', newAuthState: true, username, userID: winner.auth }); // User is logged in (authorized)
       console.log('Login completed'); // Go to dashboard page
       browserHistory.push('/main');
       // If `logout` won...
@@ -111,15 +113,32 @@ export function *returningUser() {
     yield take('RETURNING');
     const user = yield call(returnVerify);
     console.log('User User: ', user);
-    yield put({ type: 'SET_AUTH', newAuthState: true, username: user.username });
+    yield put({ type: 'SET_AUTH', newAuthState: true, username: user.username, userID: user.userID });
+  }
+}
+
+export function *leagueCreate() {
+  while (true) {
+    const leagueInfo = yield take('SUBMIT');
+    const { leagueName, team1, maxPlayers } = leagueInfo.leagueState;
+    yield call(createLeague, { leagueName, team1, maxPlayers });
+  }
+}
+
+export function *getLeagues() {
+  while (true) {
+    const { userID } = yield take('LEAGUE_LIST');
+    const list = yield call(leagueList, userID);
+    yield put({ type: 'RETURN_LEAGUES', leagues: list });
   }
 }
 
 export function *leagueFlow() {
   while (true) {
-    const leagueInfo = yield take('SUBMIT');
-    const { leagueName, team1, maxPlayers } = leagueInfo.leagueState;
-    yield call(createLeague, { leagueName, team1, maxPlayers });
+    yield [
+      call(getLeagues),
+      call(leagueCreate),
+    ];
   }
 }
 

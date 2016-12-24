@@ -2,7 +2,7 @@ import { Router } from 'express';
 import authcheck from '../middleware';
 import league from '../models/league';
 
-const router = Router();
+const router = new Router();
 
 const todos = [
   'Work out',
@@ -47,6 +47,15 @@ router.get('/league/:id', (req, res) => {
 
 router.post('/league/', (req, res) => {
   league.create({ name: req.body.name, users: [req.body.owner], size: req.body.size }, (err, result) => {
+    if (err) {
+      res.status(400).send(err);
+    }
+    res.json(result);
+  });
+});
+
+router.get('/league/byMember/:id', (req, res) => {
+  league.find({ $where: `this.users.indexOf("${req.params.id}") != -1` }, (err, result) => {
     if (err) {
       res.status(400).send(err);
     }
