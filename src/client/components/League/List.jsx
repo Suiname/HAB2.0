@@ -11,6 +11,7 @@ class LeagueList extends React.Component {
     return (
       <div>
         <div className="header notDrafted">You&apos;ve been invited to draft in these leagues!</div>
+          {this.props.leagues.map((league) => <div>League Name: {league.name}</div>)}
         <div id="notDrafted" />
         <div className="header drafted">You&apos;re part of the following leagues</div>
         <div id="drafted" />

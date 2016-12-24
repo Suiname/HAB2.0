@@ -18,7 +18,6 @@ const leagueState = (state = { leagueName: '', team1: '', maxPlayers: 0, leagues
     case 'LEAGUE_LIST':
       return state;
     case 'RETURN_LEAGUES':
-      console.log("Return Leagues Action: ", action);
       return { leagueName: state.leagueName, team1: state.team1, maxPlayers: state.maxPlayers, leagues: action.leagues };
     default:
       return state;
