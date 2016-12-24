@@ -8,8 +8,13 @@ class League extends React.Component {
   componentWillMount() {
     if (!this.props.username) {
       this.props.returningUser();
-    } else if (this.props.leagues.length === 0) {
-      this.props.leagueList(this.props.username);
+    } else if (this.props.userID) {
+      this.props.leagueList(this.props.userID);
+    }
+  }
+  componentDidUpdate() {
+    if (this.props.userID && this.props.leagues.length === 0) {
+      this.props.leagueList(this.props.userID);
     }
   }
   render() {
@@ -38,7 +43,7 @@ function mapStateToProps(state) {
     username: state.appState.username,
     userID: state.appState.userID,
     loggedIn: state.appState.loggedIn,
-    leagues: state.leagueState.leagueList,
+    leagues: state.leagueState.leagues,
   };
 }
 

@@ -103,7 +103,7 @@ export const createLeague = (leagueState) => {
 };
 
 export const leagueList = (userID) => {
-  fetch(`/api/league/byMember/${userID}`, {
+  return fetch(`/api/league/byMember/${userID}`, {
     method: 'GET',
     headers: { 'x-access-token': `${localStorage.token}`,
       'Content-Type': 'application/json',

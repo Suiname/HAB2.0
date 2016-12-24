@@ -7,5 +7,5 @@ export const logout = () => ({ type: 'LOGOUT' });
 export const setAuthState = (newAuthState, username, userID) => ({ type: 'SET_AUTH', newAuthState, username, userID });
 export const returningUser = username => ({ type: 'RETURNING', username });
 export const createLeague = leagueState => ({ type: 'SUBMIT', leagueState });
-export const leagueList = leagueState => ({ type: 'LEAGUE_LIST', leagueState });
+export const leagueList = userID => ({ type: 'LEAGUE_LIST', userID });
 export const returnLeagues = leagues => ({ type: 'RETURN_LEAGUES', leagues });

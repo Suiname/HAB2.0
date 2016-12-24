@@ -117,15 +117,31 @@ export function *returningUser() {
   }
 }
 
-export function *leagueFlow() {
+export function *leagueCreate() {
   while (true) {
     const leagueInfo = yield take('SUBMIT');
     const { leagueName, team1, maxPlayers } = leagueInfo.leagueState;
     yield call(createLeague, { leagueName, team1, maxPlayers });
+  }
+}
 
-    const userID = yield take('LEAGUE_LIST');
+export function *getLeagues() {
+  while (true) {
+    const { userID } = yield take('LEAGUE_LIST');
+    console.log('League List Request');
+    console.log("userID: ", userID);
     const list = yield call(leagueList, userID);
-    yield put({ type: 'RETURN_LEAGUES', list });
+    console.log('list: ', list);
+    yield put({ type: 'RETURN_LEAGUES', leagues: list });
+  }
+}
+
+export function *leagueFlow() {
+  while (true) {
+    yield [
+      call(getLeagues),
+      call(leagueCreate),
+    ];
   }
 }
 

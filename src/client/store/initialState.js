@@ -18,6 +18,6 @@ export default {
     leagueName: '',
     team1: '',
     maxPlayers: 0,
-    leagueList: [],
+    leagues: [],
   },
 };
