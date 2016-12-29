@@ -9,12 +9,20 @@ class LeagueList extends React.Component {
       return null;
     }
     return (
-      <div>
-        <div className="header notDrafted">You&apos;ve been invited to draft in these leagues!</div>
-          {this.props.leagues.map((league) => <div>League Name: {league.name}</div>)}
-        <div id="notDrafted" />
-        <div className="header drafted">You&apos;re part of the following leagues</div>
-        <div id="drafted" />
+      <div className="league-list-wrapper">
+        <div className="row">
+          <div className="header notDrafted twelve columns center">You belong to the following Leagues:</div>
+          {this.props.leagues.map((league) =>
+            <div className="four columns">
+              <div className="center">
+                <h4>{league.name}</h4>
+              </div>
+              <div className="u-max-full-width center">
+                <button className="button-primary button-center">Draft</button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     );
   }
