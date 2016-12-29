@@ -1,3 +1,11 @@
 @import "normalize.css";
 @import "skeleton.css";
 @import "login.css";
+
+.center {
+  text-align: center;
+}
+
+.button-center {
+  margin: 0 auto;
+}
